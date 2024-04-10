@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 
 
-//route handler with query parameters
+// //route handler with query parameters
 app.route("/name")
 .get((req,res)=>{
    var firstname=req.query.first;
@@ -21,7 +21,7 @@ app.route("/name")
 
 })
 
-
+// //chaining middleware within a route definition
 app.get('/now', function(req,res,next){
    req.time=new Date().toString();
    next();
@@ -29,19 +29,19 @@ app.get('/now', function(req,res,next){
    res.json({time:req.time});
 });
 
-//route handler with route parameters
+// //route handler with route parameters
 app.get("/:word/echo",(req,res)=>{
    const word=req.params.word;
    res.json({echo:word});
 })
 
-//Logging middleware
-app.use((req,res,next)=>{
-   console.log(`${req.method} ${req.path} - ${req.ip}`);
-   next();
-})
+// //Logging middleware
+// app.use((req,res,next)=>{
+//    console.log(`${req.method} ${req.path} - ${req.ip}`);
+//    next();
+// })
 
-//basic route handler
+// //basic route handler
 app.get("/",(req,res)=>{
     absolutePath=__dirname+'/views/index.html';
     res.sendFile(absolutePath);
@@ -51,18 +51,18 @@ app.get("/",(req,res)=>{
 
 
 
-//middleware
+// //middleware
 app.use('/public',express.static(__dirname + '/public'));
 
-//route handler
-app.get("/json",(req,res)=>{
+// //route handler
+// app.get("/json",(req,res)=>{
   
-   if(process.env.MESSAGE_STYLE==="uppercase"){
-     res.json({"message":"HELLO JSON"});
-  }else{
-    res.json({"message":"Hello json"});
- }
-});
+//    if(process.env.MESSAGE_STYLE==="uppercase"){
+//      res.json({"message":"HELLO JSON"});
+//   }else{
+//     res.json({"message":"Hello json"});
+//  }
+// });
 
 
 
